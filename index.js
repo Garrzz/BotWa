@@ -81,6 +81,17 @@ async function startBot() {
   });
 }
 
+const qrcode = require('qrcode-terminal');
+
+// di dalam startBot()
+sock.ev.on('connection.update', (update) => {
+    const { connection, qr } = update;
+    if (qr) {
+        qrcode.generate(qr, { small: true });
+        console.log('Scan QR dengan WhatsApp kamu!');
+    }
+});
+
 console.log("Starting bot...");
 startBot();
 
